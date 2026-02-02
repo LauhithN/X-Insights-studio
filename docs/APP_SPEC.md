@@ -1,4 +1,4 @@
-# X Insights Studio (CSV-Only)
+﻿# X Insights Studio (CSV-Only)
 
 A mini web app that analyzes X (Twitter) analytics using only uploaded CSV exports.
 No API keys. No paid services. Runs 100% in the browser.
@@ -77,7 +77,7 @@ Table sorted by `follows_per_1k`:
 - New follows
 - Follows per 1k impressions
 
-#### Engagement ≠ Growth Scatter
+#### Engagement != Growth Scatter
 Scatter plot:
 - X-axis: engagements
 - Y-axis: new_follows
@@ -93,19 +93,21 @@ Metric priority:
 3) posting frequency (fallback if metrics missing)
 
 ### 3) Viral Cards (Exportable PNG)
-A set of “shareable” cards optimized for screenshots:
-- “These tweets drove the most follows/1k impressions”
-- “Engagement ≠ Growth” with the scatter plot
-- “Best posting times” with heatmap
+A set of shareable cards optimized for screenshots:
+- "These tweets drove the most follows/1k impressions"
+- "Engagement != Growth" with the scatter plot
+- "Best posting times" with heatmap
 Includes:
-- Download button → exports the card area to PNG using html-to-image
+- Download button -> exports the card area to PNG using html-to-image
 
 ### 4) Daily Trends (overview CSV optional)
 If overview CSV present:
 - Daily impressions trend
 - Daily follows trend
 - Profile visits trend
-- Mark spike days
+
+### 5) Demo Mode
+Loads a tiny embedded sample dataset to preview the UI without real CSVs.
 
 ## UX Notes
 - Dark, minimalist design with soft glassy cards

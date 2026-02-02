@@ -1,0 +1,43 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at 15% 10%, rgba(110, 243, 197, 0.12), transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(255, 122, 89, 0.1), transparent 45%),
+    linear-gradient(180deg, #0a0f14 0%, #0b121a 50%, #0b0f14 100%);
+  color: #f5f7fa;
+  font-family: var(--font-space), system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+@layer components {
+  .glass-card {
+    @apply rounded-2xl border border-white/10 bg-mist/90 backdrop-blur-xl shadow-card;
+  }
+
+  .pill {
+    @apply rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-slate;
+  }
+
+  .glow-ring {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 24px rgba(110, 243, 197, 0.2);
+  }
+
+  .grid-stroke {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 42px 42px;
+  }
+}
