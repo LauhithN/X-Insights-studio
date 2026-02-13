@@ -1,4 +1,4 @@
-﻿/** @type {import('tailwindcss').Config} */
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
@@ -8,18 +8,25 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-space)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"]
+      },
       colors: {
-        ink: "#0b0f14",
-        mist: "#0f1621",
-        glass: "rgba(255, 255, 255, 0.06)",
-        edge: "rgba(255, 255, 255, 0.12)",
-        neon: "#6ef3c5",
-        ember: "#ff7a59",
-        slate: "#b6c5d4"
+        ink: "#120f0b",
+        mist: "#1b1611",
+        cinder: "#2a2118",
+        glass: "rgba(245, 229, 204, 0.08)",
+        edge: "rgba(247, 224, 188, 0.2)",
+        neon: "#d7ff70",
+        ember: "#ff8652",
+        slate: "#c7b291",
+        sand: "#f5ead5"
       },
       boxShadow: {
-        glow: "0 0 24px rgba(110, 243, 197, 0.18)",
-        card: "0 20px 60px rgba(0,0,0,0.45)"
+        glow: "0 0 0 1px rgba(215, 255, 112, 0.3), 0 0 36px rgba(215, 255, 112, 0.2)",
+        card: "0 24px 70px rgba(0,0,0,0.45)",
+        lift: "0 12px 32px rgba(0,0,0,0.35)"
       }
     }
   },

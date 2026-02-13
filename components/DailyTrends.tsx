@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import {
   CartesianGrid,
@@ -31,54 +31,78 @@ export default function DailyTrends({ rows }: DailyTrendsProps) {
     }));
 
   if (!data.length) {
-    return (
-      <div className="glass-card p-6 text-sm text-slate">
-        Overview CSV is empty or missing dates.
-      </div>
-    );
+    return <div className="glass-card p-6 text-sm text-slate/90">Overview CSV is empty or missing dates.</div>;
   }
 
   return (
-    <div className="glass-card h-[360px] p-4">
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data}>
-          <CartesianGrid stroke="rgba(255,255,255,0.08)" />
-          <XAxis dataKey="dateLabel" tick={{ fill: "#9fb1c1" }} />
-          <YAxis tick={{ fill: "#9fb1c1" }} />
-          <Tooltip
-            contentStyle={{
-              background: "#0b0f14",
-              border: "1px solid rgba(255,255,255,0.12)",
-              borderRadius: 12
-            }}
-            formatter={(value: number, name: string) => [formatNumber(value), name]}
-          />
-          <Line
-            type="monotone"
-            dataKey="impressions"
-            name="Impressions"
-            stroke="#6ef3c5"
-            strokeWidth={2}
-            dot={false}
-          />
-          <Line
-            type="monotone"
-            dataKey="newFollows"
-            name="New follows"
-            stroke="#ff7a59"
-            strokeWidth={2}
-            dot={false}
-          />
-          <Line
-            type="monotone"
-            dataKey="profileVisits"
-            name="Profile visits"
-            stroke="#9fb1c1"
-            strokeWidth={2}
-            dot={false}
-          />
-        </LineChart>
-      </ResponsiveContainer>
+    <div className="glass-card p-4 sm:p-5">
+      <div className="mb-3 flex flex-wrap gap-2 text-xs text-slate/85">
+        <span className="soft-chip">
+          <span className="mr-2 h-2 w-2 rounded-full bg-neon"></span>
+          Impressions
+        </span>
+        <span className="soft-chip">
+          <span className="mr-2 h-2 w-2 rounded-full bg-ember"></span>
+          New follows
+        </span>
+        <span className="soft-chip">
+          <span className="mr-2 h-2 w-2 rounded-full bg-sand"></span>
+          Profile visits
+        </span>
+      </div>
+
+      <div className="h-[330px]">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={data}>
+            <CartesianGrid stroke="rgba(245, 229, 204, 0.08)" />
+            <XAxis
+              dataKey="dateLabel"
+              tick={{ fill: "#c7b291", fontSize: 11 }}
+              axisLine={{ stroke: "rgba(247, 224, 188, 0.35)" }}
+              tickLine={{ stroke: "rgba(247, 224, 188, 0.35)" }}
+            />
+            <YAxis
+              tick={{ fill: "#c7b291", fontSize: 11 }}
+              axisLine={{ stroke: "rgba(247, 224, 188, 0.35)" }}
+              tickLine={{ stroke: "rgba(247, 224, 188, 0.35)" }}
+            />
+            <Tooltip
+              contentStyle={{
+                background: "#120f0b",
+                border: "1px solid rgba(247, 224, 188, 0.3)",
+                borderRadius: 12,
+                color: "#f5ead5"
+              }}
+              formatter={(value: number, name: string) => [formatNumber(value), name]}
+            />
+            <Line
+              type="monotone"
+              dataKey="impressions"
+              name="Impressions"
+              stroke="#d7ff70"
+              strokeWidth={2.2}
+              dot={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="newFollows"
+              name="New follows"
+              stroke="#ff8652"
+              strokeWidth={2.2}
+              dot={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="profileVisits"
+              name="Profile visits"
+              stroke="#f5ead5"
+              strokeWidth={2}
+              strokeOpacity={0.85}
+              dot={false}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }
