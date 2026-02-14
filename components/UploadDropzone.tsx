@@ -22,7 +22,7 @@ const MAX_ROWS_PER_FILE = 120000;
 const MAX_FILES_PER_UPLOAD = 6;
 
 const CONTENT_MARKERS = [
-  "posttext", "tweettext", "text", "tweet", "post", "content", "body",
+  "posttext", "tweettext", "text", "tweet", "content", "body",
   "createdat", "posttime", "tweettime", "timestamp"
 ];
 const OVERVIEW_MARKERS = ["date", "day", "engagements"];
@@ -40,6 +40,8 @@ function classifyCsv(fields: string[], fileName: string): "content" | "overview"
 
   if (hasContentMarker && hasImpressions && !hasOverviewMarker) return "content";
   if (hasOverviewMarker && hasImpressions && !hasContentMarker) return "overview";
+
+  // Both markers present or neither — use filename as tiebreaker
   if (normalizedFileName.includes("overview") && hasImpressions) return "overview";
   if (
     (normalizedFileName.includes("content") ||
@@ -49,6 +51,8 @@ function classifyCsv(fields: string[], fileName: string): "content" | "overview"
   ) {
     return "content";
   }
+
+  // If both markers found but filename is ambiguous, try both normalizers
   return "unknown";
 }
 
@@ -75,6 +79,7 @@ export default function UploadDropzone() {
   const router = useRouter();
   const setContentRows = useAnalyticsStore((state) => state.setContentRows);
   const setOverviewRows = useAnalyticsStore((state) => state.setOverviewRows);
+  const clear = useAnalyticsStore((state) => state.clear);
   const [messages, setMessages] = useState<Message[]>([]);
   const [dragActive, setDragActive] = useState(false);
   const [phase, setPhase] = useState<UploadPhase>("idle");
@@ -105,6 +110,7 @@ export default function UploadDropzone() {
       if (!rawFiles.length) return;
 
       resetMessages();
+      clear();
       setPhase("loading");
       setStatusText("Validating files...");
       setLoadedCount(0);
@@ -293,7 +299,7 @@ export default function UploadDropzone() {
         setStatusText("An unexpected error occurred while parsing.");
       }
     },
-    [addMessage, addMessages, resetMessages, setContentRows, setOverviewRows]
+    [addMessage, addMessages, clear, resetMessages, setContentRows, setOverviewRows]
   );
 
   const onDrop = useCallback(

@@ -40,10 +40,10 @@ export default function DashboardPage() {
   const clear = useAnalyticsStore((state) => state.clear);
 
   useEffect(() => {
-    if (hasHydrated && !contentRows.length) {
+    if (hasHydrated && !contentRows.length && !overviewRows.length) {
       router.replace("/");
     }
-  }, [contentRows.length, hasHydrated, router]);
+  }, [contentRows.length, overviewRows.length, hasHydrated, router]);
 
   const totals = useMemo(() => {
     const impressions = contentRows.reduce((sum, row) => sum + row.impressions, 0);

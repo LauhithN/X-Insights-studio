@@ -7,18 +7,19 @@ export default function DashboardEntryActions() {
   const router = useRouter();
   const hasHydrated = useAnalyticsStore((state) => state.hasHydrated);
   const contentRows = useAnalyticsStore((state) => state.contentRows);
+  const overviewRows = useAnalyticsStore((state) => state.overviewRows);
 
-  const hasContent = contentRows.length > 0;
-  const canOpenDashboard = hasHydrated && hasContent;
+  const hasData = contentRows.length > 0 || overviewRows.length > 0;
+  const canOpenDashboard = hasHydrated && hasData;
 
   if (!hasHydrated) {
     return <p className="text-xs text-slate/50">Checking saved data...</p>;
   }
 
-  if (!hasContent) {
+  if (!hasData) {
     return (
       <p className="text-xs text-slate/50">
-        Upload a content CSV to unlock the dashboard.
+        Upload a CSV to unlock the dashboard.
       </p>
     );
   }
