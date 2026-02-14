@@ -1,23 +1,23 @@
-﻿export type ContentRow = {
+export type ContentRow = {
   id?: string;
   text: string;
   createdAt: string;
   impressions: number;
-  likes: number;
-  replies: number;
-  reposts: number;
-  bookmarks: number;
-  shares: number;
-  profileVisits: number;
-  newFollows: number;
+  likes: number | null;
+  replies: number | null;
+  reposts: number | null;
+  bookmarks: number | null;
+  shares: number | null;
+  profileVisits: number | null;
+  newFollows: number | null;
 };
 
 export type OverviewRow = {
   date: string;
   impressions: number;
-  engagements: number;
-  profileVisits: number;
-  newFollows: number;
+  engagements: number | null;
+  profileVisits: number | null;
+  newFollows: number | null;
 };
 
 export type NormalizationResult<T> = {

@@ -15,7 +15,7 @@ module.exports = {
         edge: "rgba(255, 255, 255, 0.12)",
         neon: "#6ef3c5",
         ember: "#ff7a59",
-        slate: "#b6c5d4"
+        slate: "#c8d5e2"
       },
       boxShadow: {
         glow: "0 0 24px rgba(110, 243, 197, 0.18)",

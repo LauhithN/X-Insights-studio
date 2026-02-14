@@ -1,5 +1,5 @@
-﻿import { ContentRow, NormalizationResult } from "./types";
-import { buildHeaderMap, toDateISO, toNumber, toText } from "./normalizeHelpers";
+import { ContentRow, FIELD_LABELS, NormalizationResult } from "./types";
+import { buildHeaderMap, parseNumber, toText, toTimestampISO } from "./normalizeHelpers";
 
 const CONTENT_ALIASES: Record<string, string[]> = {
   id: ["post id", "tweet id", "tweetid", "postid", "id"],
@@ -26,6 +26,18 @@ const OPTIONAL_FIELDS = [
   "profileVisits",
   "newFollows"
 ];
+type OptionalNumericField =
+  | "likes"
+  | "replies"
+  | "reposts"
+  | "bookmarks"
+  | "shares"
+  | "profileVisits"
+  | "newFollows";
+
+function countInvalid(target: Record<string, number>, field: string): void {
+  target[field] = (target[field] ?? 0) + 1;
+}
 
 export function normalizeContent(
   rows: Record<string, unknown>[],
@@ -40,28 +52,70 @@ export function normalizeContent(
     return { rows: [], missingRequired, missingOptional, warnings };
   }
 
-  const normalizedRows = rows.map((row) => {
-    const text = toText(row[headerMap.text as string]);
-    const createdAt = toDateISO(row[headerMap.createdAt as string]);
+  let droppedForImpressions = 0;
+  let invalidTimestampCount = 0;
+  const invalidOptionalCounts: Record<string, number> = {};
 
-    return {
-      id: headerMap.id ? toText(row[headerMap.id]) : undefined,
-      text,
-      createdAt,
-      impressions: toNumber(row[headerMap.impressions as string]),
-      likes: headerMap.likes ? toNumber(row[headerMap.likes]) : 0,
-      replies: headerMap.replies ? toNumber(row[headerMap.replies]) : 0,
-      reposts: headerMap.reposts ? toNumber(row[headerMap.reposts]) : 0,
-      bookmarks: headerMap.bookmarks ? toNumber(row[headerMap.bookmarks]) : 0,
-      shares: headerMap.shares ? toNumber(row[headerMap.shares]) : 0,
-      profileVisits: headerMap.profileVisits ? toNumber(row[headerMap.profileVisits]) : 0,
-      newFollows: headerMap.newFollows ? toNumber(row[headerMap.newFollows]) : 0
+  const normalizedRows = rows.flatMap((row) => {
+    const impressionsResult = parseNumber(row[headerMap.impressions as string]);
+    if (impressionsResult.value === null) {
+      droppedForImpressions += 1;
+      return [];
+    }
+
+    const parseOptionalNumber = (field: OptionalNumericField): number | null => {
+      const columnName = headerMap[field];
+      if (!columnName) {
+        return null;
+      }
+
+      const result = parseNumber(row[columnName]);
+      if (result.reason === "invalid") {
+        countInvalid(invalidOptionalCounts, field);
+      }
+      return result.value;
     };
+
+    const createdAt = toTimestampISO(row[headerMap.createdAt as string]);
+    if (!createdAt) {
+      invalidTimestampCount += 1;
+    }
+
+    return [
+      {
+        id: headerMap.id ? toText(row[headerMap.id]) : undefined,
+        text: toText(row[headerMap.text as string]),
+        createdAt,
+        impressions: impressionsResult.value,
+        likes: parseOptionalNumber("likes"),
+        replies: parseOptionalNumber("replies"),
+        reposts: parseOptionalNumber("reposts"),
+        bookmarks: parseOptionalNumber("bookmarks"),
+        shares: parseOptionalNumber("shares"),
+        profileVisits: parseOptionalNumber("profileVisits"),
+        newFollows: parseOptionalNumber("newFollows")
+      }
+    ];
   });
 
-  if (normalizedRows.some((row) => !row.createdAt)) {
-    warnings.push("Some posts have invalid dates and will be skipped in time-based charts.");
+  if (droppedForImpressions > 0) {
+    warnings.push(
+      `${droppedForImpressions} row(s) were dropped because impressions were missing or invalid.`
+    );
   }
+
+  if (invalidTimestampCount > 0) {
+    warnings.push(
+      `${invalidTimestampCount} row(s) have invalid post timestamps and are excluded from time-based charts.`
+    );
+  }
+
+  Object.entries(invalidOptionalCounts).forEach(([field, count]) => {
+    const label = FIELD_LABELS[field] ?? field;
+    warnings.push(
+      `${count} row(s) had invalid "${label}" values and were treated as missing.`
+    );
+  });
 
   return { rows: normalizedRows, missingRequired, missingOptional, warnings };
 }

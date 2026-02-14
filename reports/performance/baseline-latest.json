@@ -1,0 +1,123 @@
+{
+  "generatedAt": "2026-02-14T06:23:40.438Z",
+  "targets": {
+    "performance": 90,
+    "accessibility": 95,
+    "cls": 0.1,
+    "inpMs": 200
+  },
+  "routes": {
+    "/": {
+      "requestedUrl": "http://localhost:4173/",
+      "finalUrl": "http://localhost:4173/",
+      "lighthouseVersion": "12.8.2",
+      "fetchTime": "2026-02-14T06:23:25.209Z",
+      "performanceScore": 98,
+      "accessibilityScore": 98,
+      "bestPracticesScore": 96,
+      "seoScore": 100,
+      "fcpMs": 774.0843,
+      "lcpMs": 2357.1264499999997,
+      "cls": 0,
+      "inpMs": 71,
+      "inpAuditSource": "max-potential-fid",
+      "tbtMs": 10.5,
+      "ttiMs": 2439.6264499999997,
+      "targetStatus": {
+        "performance": true,
+        "accessibility": true,
+        "cls": true,
+        "inp": true,
+        "overall": true
+      }
+    },
+    "/dashboard": {
+      "requestedUrl": "http://localhost:4173/dashboard",
+      "finalUrl": "http://localhost:4173/dashboard",
+      "lighthouseVersion": "12.8.2",
+      "fetchTime": "2026-02-14T06:23:32.641Z",
+      "performanceScore": 99,
+      "accessibilityScore": 95,
+      "bestPracticesScore": 100,
+      "seoScore": 100,
+      "fcpMs": 609.6672,
+      "lcpMs": 1968.5085218566894,
+      "cls": 0,
+      "inpMs": 97,
+      "inpAuditSource": "max-potential-fid",
+      "tbtMs": 80,
+      "ttiMs": 2030.5085218566896,
+      "targetStatus": {
+        "performance": true,
+        "accessibility": true,
+        "cls": true,
+        "inp": true,
+        "overall": true
+      }
+    }
+  },
+  "bundles": {
+    "/": {
+      "files": [
+        "static/chunks/627e8c6e0a49d15a.js",
+        "static/chunks/76c064224d953678.js",
+        "static/chunks/6fe2bb5db3078ade.js",
+        "static/chunks/f2f58a7e93290fbb.js",
+        "static/chunks/turbopack-13b3096702bb9c2e.js",
+        "static/chunks/a6dad97d9634a72d.js",
+        "static/chunks/74f1b9da08b28ae5.js",
+        "static/chunks/51387fb44b650310.js"
+      ],
+      "sharedFiles": [
+        "static/chunks/627e8c6e0a49d15a.js",
+        "static/chunks/76c064224d953678.js",
+        "static/chunks/6fe2bb5db3078ade.js",
+        "static/chunks/f2f58a7e93290fbb.js",
+        "static/chunks/turbopack-13b3096702bb9c2e.js",
+        "static/chunks/a6dad97d9634a72d.js"
+      ],
+      "routeFiles": [
+        "static/chunks/74f1b9da08b28ae5.js",
+        "static/chunks/51387fb44b650310.js"
+      ],
+      "sharedRawBytes": 522765,
+      "sharedGzipBytes": 160593,
+      "routeRawBytes": 73786,
+      "routeGzipBytes": 21989,
+      "totalRawBytes": 596551,
+      "totalGzipBytes": 182582
+    },
+    "/dashboard": {
+      "files": [
+        "static/chunks/627e8c6e0a49d15a.js",
+        "static/chunks/76c064224d953678.js",
+        "static/chunks/6fe2bb5db3078ade.js",
+        "static/chunks/f2f58a7e93290fbb.js",
+        "static/chunks/turbopack-13b3096702bb9c2e.js",
+        "static/chunks/a6dad97d9634a72d.js",
+        "static/chunks/74f1b9da08b28ae5.js",
+        "static/chunks/a009ae1686af9be3.js",
+        "static/chunks/f2bac862abb56bf9.js"
+      ],
+      "sharedFiles": [
+        "static/chunks/627e8c6e0a49d15a.js",
+        "static/chunks/76c064224d953678.js",
+        "static/chunks/6fe2bb5db3078ade.js",
+        "static/chunks/f2f58a7e93290fbb.js",
+        "static/chunks/turbopack-13b3096702bb9c2e.js",
+        "static/chunks/a6dad97d9634a72d.js"
+      ],
+      "routeFiles": [
+        "static/chunks/74f1b9da08b28ae5.js",
+        "static/chunks/a009ae1686af9be3.js",
+        "static/chunks/f2bac862abb56bf9.js"
+      ],
+      "sharedRawBytes": 522765,
+      "sharedGzipBytes": 160593,
+      "routeRawBytes": 472734,
+      "routeGzipBytes": 123748,
+      "totalRawBytes": 995499,
+      "totalGzipBytes": 284341
+    }
+  }
+}

@@ -109,49 +109,49 @@ export const demoContentRows: ContentRow[] = [
 
 export const demoOverviewRows: OverviewRow[] = [
   {
-    date: "2025-01-06T00:00:00.000Z",
+    date: "2025-01-06",
     impressions: 26500,
     engagements: 930,
     profileVisits: 520,
     newFollows: 120
   },
   {
-    date: "2025-01-07T00:00:00.000Z",
+    date: "2025-01-07",
     impressions: 31200,
     engagements: 1240,
     profileVisits: 610,
     newFollows: 165
   },
   {
-    date: "2025-01-08T00:00:00.000Z",
+    date: "2025-01-08",
     impressions: 21800,
     engagements: 760,
     profileVisits: 430,
     newFollows: 98
   },
   {
-    date: "2025-01-09T00:00:00.000Z",
+    date: "2025-01-09",
     impressions: 34800,
     engagements: 1520,
     profileVisits: 720,
     newFollows: 190
   },
   {
-    date: "2025-01-10T00:00:00.000Z",
+    date: "2025-01-10",
     impressions: 28900,
     engagements: 940,
     profileVisits: 580,
     newFollows: 132
   },
   {
-    date: "2025-01-11T00:00:00.000Z",
+    date: "2025-01-11",
     impressions: 30100,
     engagements: 1100,
     profileVisits: 640,
     newFollows: 150
   },
   {
-    date: "2025-01-12T00:00:00.000Z",
+    date: "2025-01-12",
     impressions: 27400,
     engagements: 980,
     profileVisits: 560,

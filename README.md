@@ -52,3 +52,14 @@ Use the **Demo mode** button on the landing page to load an embedded sample data
 - No server actions or API routes.
 - No external services or paid APIs.
 - All parsing and visuals are client-side.
+
+## Performance baseline
+Capture automated mobile baselines for `/` and `/dashboard` (Lighthouse, Web Vitals, interaction timings, and route bundle sizes):
+
+```bash
+npm run perf:baseline
+```
+
+Outputs:
+- `reports/performance/baseline-latest.md`
+- `reports/performance/baseline-latest.json`

@@ -1,0 +1,129 @@
+{
+  "generatedAt": "2026-02-14T06:21:20.774Z",
+  "targets": {
+    "performance": 90,
+    "accessibility": 95,
+    "cls": 0.1,
+    "inpMs": 200
+  },
+  "routes": {
+    "/": {
+      "requestedUrl": "http://localhost:4173/",
+      "finalUrl": "http://localhost:4173/",
+      "lighthouseVersion": "12.8.2",
+      "fetchTime": "2026-02-14T06:21:05.557Z",
+      "performanceScore": 98,
+      "accessibilityScore": 98,
+      "bestPracticesScore": 96,
+      "seoScore": 100,
+      "fcpMs": 777.6797999999999,
+      "lcpMs": 2371.5197,
+      "cls": 0,
+      "inpMs": 80,
+      "inpAuditSource": "max-potential-fid",
+      "tbtMs": 15,
+      "ttiMs": 2454.0197,
+      "targetStatus": {
+        "performance": true,
+        "accessibility": true,
+        "cls": true,
+        "inp": true,
+        "overall": true
+      }
+    },
+    "/dashboard": {
+      "requestedUrl": "http://localhost:4173/dashboard",
+      "finalUrl": "http://localhost:4173/dashboard",
+      "lighthouseVersion": "12.8.2",
+      "fetchTime": "2026-02-14T06:21:13.073Z",
+      "performanceScore": 99,
+      "accessibilityScore": 95,
+      "bestPracticesScore": 100,
+      "seoScore": 100,
+      "fcpMs": 611.63965,
+      "lcpMs": 1978.9534218566894,
+      "cls": 0,
+      "inpMs": 104,
+      "inpAuditSource": "max-potential-fid",
+      "tbtMs": 95,
+      "ttiMs": 2044.4534218566894,
+      "targetStatus": {
+        "performance": true,
+        "accessibility": true,
+        "cls": true,
+        "inp": true,
+        "overall": true
+      }
+    }
+  },
+  "bundles": {
+    "/": {
+      "files": [
+        "static/chunks/627e8c6e0a49d15a.js",
+        "static/chunks/76c064224d953678.js",
+        "static/chunks/6fe2bb5db3078ade.js",
+        "static/chunks/f2f58a7e93290fbb.js",
+        "static/chunks/turbopack-13b3096702bb9c2e.js",
+        "static/chunks/a6dad97d9634a72d.js",
+        "/_next/static/chunks/74f1b9da08b28ae5.js",
+        "/_next/static/chunks/51387fb44b650310.js",
+        "static/chunks/51387fb44b650310.js"
+      ],
+      "sharedFiles": [
+        "static/chunks/627e8c6e0a49d15a.js",
+        "static/chunks/76c064224d953678.js",
+        "static/chunks/6fe2bb5db3078ade.js",
+        "static/chunks/f2f58a7e93290fbb.js",
+        "static/chunks/turbopack-13b3096702bb9c2e.js",
+        "static/chunks/a6dad97d9634a72d.js"
+      ],
+      "routeFiles": [
+        "/_next/static/chunks/74f1b9da08b28ae5.js",
+        "/_next/static/chunks/51387fb44b650310.js",
+        "static/chunks/51387fb44b650310.js"
+      ],
+      "sharedRawBytes": 522765,
+      "sharedGzipBytes": 160593,
+      "routeRawBytes": 116725,
+      "routeGzipBytes": 36533,
+      "totalRawBytes": 639490,
+      "totalGzipBytes": 197126
+    },
+    "/dashboard": {
+      "files": [
+        "static/chunks/627e8c6e0a49d15a.js",
+        "static/chunks/76c064224d953678.js",
+        "static/chunks/6fe2bb5db3078ade.js",
+        "static/chunks/f2f58a7e93290fbb.js",
+        "static/chunks/turbopack-13b3096702bb9c2e.js",
+        "static/chunks/a6dad97d9634a72d.js",
+        "/_next/static/chunks/74f1b9da08b28ae5.js",
+        "/_next/static/chunks/a009ae1686af9be3.js",
+        "/_next/static/chunks/f2bac862abb56bf9.js",
+        "static/chunks/a009ae1686af9be3.js",
+        "static/chunks/f2bac862abb56bf9.js"
+      ],
+      "sharedFiles": [
+        "static/chunks/627e8c6e0a49d15a.js",
+        "static/chunks/76c064224d953678.js",
+        "static/chunks/6fe2bb5db3078ade.js",
+        "static/chunks/f2f58a7e93290fbb.js",
+        "static/chunks/turbopack-13b3096702bb9c2e.js",
+        "static/chunks/a6dad97d9634a72d.js"
+      ],
+      "routeFiles": [
+        "/_next/static/chunks/74f1b9da08b28ae5.js",
+        "/_next/static/chunks/a009ae1686af9be3.js",
+        "/_next/static/chunks/f2bac862abb56bf9.js",
+        "static/chunks/a009ae1686af9be3.js",
+        "static/chunks/f2bac862abb56bf9.js"
+      ],
+      "sharedRawBytes": 522765,
+      "sharedGzipBytes": 160593,
+      "routeRawBytes": 914621,
+      "routeGzipBytes": 240051,
+      "totalRawBytes": 1437386,
+      "totalGzipBytes": 400644
+    }
+  }
+}

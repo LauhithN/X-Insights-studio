@@ -1,5 +1,5 @@
-﻿import { NormalizationResult, OverviewRow } from "./types";
-import { buildHeaderMap, toDateISO, toNumber } from "./normalizeHelpers";
+import { FIELD_LABELS, NormalizationResult, OverviewRow } from "./types";
+import { buildHeaderMap, parseNumber, toDateKey } from "./normalizeHelpers";
 
 const OVERVIEW_ALIASES: Record<string, string[]> = {
   date: ["date", "day"],
@@ -11,6 +11,11 @@ const OVERVIEW_ALIASES: Record<string, string[]> = {
 
 const REQUIRED_FIELDS = ["date", "impressions"];
 const OPTIONAL_FIELDS = ["engagements", "profileVisits", "newFollows"];
+type OptionalNumericField = "engagements" | "profileVisits" | "newFollows";
+
+function countInvalid(target: Record<string, number>, field: string): void {
+  target[field] = (target[field] ?? 0) + 1;
+}
 
 export function normalizeOverview(
   rows: Record<string, unknown>[],
@@ -25,19 +30,63 @@ export function normalizeOverview(
     return { rows: [], missingRequired, missingOptional, warnings };
   }
 
-  const normalizedRows = rows.map((row) => {
-    return {
-      date: toDateISO(row[headerMap.date as string]),
-      impressions: toNumber(row[headerMap.impressions as string]),
-      engagements: headerMap.engagements ? toNumber(row[headerMap.engagements]) : 0,
-      profileVisits: headerMap.profileVisits ? toNumber(row[headerMap.profileVisits]) : 0,
-      newFollows: headerMap.newFollows ? toNumber(row[headerMap.newFollows]) : 0
+  let droppedForDate = 0;
+  let droppedForImpressions = 0;
+  const invalidOptionalCounts: Record<string, number> = {};
+
+  const normalizedRows = rows.flatMap((row) => {
+    const date = toDateKey(row[headerMap.date as string]);
+    if (!date) {
+      droppedForDate += 1;
+      return [];
+    }
+
+    const impressionsResult = parseNumber(row[headerMap.impressions as string]);
+    if (impressionsResult.value === null) {
+      droppedForImpressions += 1;
+      return [];
+    }
+
+    const parseOptionalNumber = (field: OptionalNumericField): number | null => {
+      const columnName = headerMap[field];
+      if (!columnName) {
+        return null;
+      }
+
+      const result = parseNumber(row[columnName]);
+      if (result.reason === "invalid") {
+        countInvalid(invalidOptionalCounts, field);
+      }
+      return result.value;
     };
+
+    return [
+      {
+        date,
+        impressions: impressionsResult.value,
+        engagements: parseOptionalNumber("engagements"),
+        profileVisits: parseOptionalNumber("profileVisits"),
+        newFollows: parseOptionalNumber("newFollows")
+      }
+    ];
   });
 
-  if (normalizedRows.some((row) => !row.date)) {
-    warnings.push("Some overview rows have invalid dates and will be skipped in trends.");
+  if (droppedForDate > 0) {
+    warnings.push(`${droppedForDate} overview row(s) were dropped due to invalid dates.`);
   }
+
+  if (droppedForImpressions > 0) {
+    warnings.push(
+      `${droppedForImpressions} overview row(s) were dropped because impressions were missing or invalid.`
+    );
+  }
+
+  Object.entries(invalidOptionalCounts).forEach(([field, count]) => {
+    const label = FIELD_LABELS[field] ?? field;
+    warnings.push(
+      `${count} overview row(s) had invalid "${label}" values and were treated as missing.`
+    );
+  });
 
   return { rows: normalizedRows, missingRequired, missingOptional, warnings };
 }

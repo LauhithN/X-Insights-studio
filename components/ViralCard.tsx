@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRef, useState } from "react";
 import { toPng } from "html-to-image";
@@ -33,9 +33,9 @@ export default function ViralCard({ title, subtitle, children, fileName }: Viral
       <div ref={cardRef} className="rounded-xl border border-white/10 bg-[#0b0f14] p-4">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-slate/80">Viral Insight</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-slate/90">Viral Insight</p>
             <h4 className="text-lg font-semibold text-white">{title}</h4>
-            {subtitle ? <p className="text-xs text-slate/80">{subtitle}</p> : null}
+            {subtitle ? <p className="text-xs text-slate">{subtitle}</p> : null}
           </div>
           <div className="pill">X Insights</div>
         </div>
@@ -43,8 +43,9 @@ export default function ViralCard({ title, subtitle, children, fileName }: Viral
       </div>
       <button
         onClick={handleExport}
-        className="mt-4 w-full rounded-full border border-edge/60 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20 disabled:opacity-50"
+        className="mt-4 w-full rounded-full border border-edge/60 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neon disabled:opacity-50"
         disabled={isExporting}
+        aria-busy={isExporting}
       >
         {isExporting ? "Exporting..." : "Export PNG"}
       </button>

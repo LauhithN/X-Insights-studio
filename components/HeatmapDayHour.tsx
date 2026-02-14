@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useMemo } from "react";
 import { ContentRow } from "@/lib/types";
@@ -21,6 +21,17 @@ function colorFor(value: number, max: number): string {
   return `rgba(110, 243, 197, ${alpha.toFixed(2)})`;
 }
 
+function formatTooltip(dayLabel: string, hourIndex: number, value: number, count: number, metric: MetricType): string {
+  const base = `${dayLabel} ${hourIndex.toString().padStart(2, "0")}:00 UTC`;
+  if (metric === "followsPer1k") {
+    return `${base} - ${value.toFixed(2)} follows / 1k from ${count} post(s)`;
+  }
+  if (metric === "engagementRate") {
+    return `${base} - ${(value * 100).toFixed(2)}% engagement rate from ${count} post(s)`;
+  }
+  return `${base} - ${count} post(s)`;
+}
+
 export default function HeatmapDayHour({ rows, metric, variant = "card" }: HeatmapDayHourProps) {
   const { grid, maxValue, metricLabel } = useMemo(() => {
     const gridData = Array.from({ length: 7 }, () =>
@@ -41,23 +52,23 @@ export default function HeatmapDayHour({ rows, metric, variant = "card" }: Heatm
     });
 
     const computed = gridData.map((row) =>
-      row.map((cell) => ({
-        value: metric === "frequency" ? cell.count : cell.count ? cell.sum / cell.count : 0,
-        count: cell.count
-      }))
+      row.map((cell) => {
+        const value = metric === "frequency" ? cell.count : cell.count ? cell.sum / cell.count : 0;
+        return {
+          value,
+          count: cell.count
+        };
+      })
     );
 
-    const max = Math.max(
-      0,
-      ...computed.flat().map((cell) => (metric === "frequency" ? cell.count : cell.value))
-    );
+    const max = Math.max(0, ...computed.flat().map((cell) => cell.value));
 
     const label =
       metric === "followsPer1k"
         ? "Follows per 1k impressions"
         : metric === "engagementRate"
-        ? "Engagement rate"
-        : "Posting volume";
+          ? "Engagement rate"
+          : "Posting volume";
 
     return { grid: computed, maxValue: max, metricLabel: label };
   }, [rows, metric]);
@@ -98,14 +109,18 @@ export default function HeatmapDayHour({ rows, metric, variant = "card" }: Heatm
           {days.map((dayLabel, dayIndex) => (
             <div key={dayLabel} className="contents">
               <div className="text-[10px] text-slate">{dayLabel}</div>
-              {grid[dayIndex].map((cell, hourIndex) => (
-                <div
-                  key={`${dayLabel}-${hourIndex}`}
-                  className={variant === "card" ? "h-6 rounded-sm border border-white/5" : "h-4 rounded-sm border border-white/5"}
-                  style={{ backgroundColor: colorFor(cell.value, maxValue) }}
-                  title={`${dayLabel} ${hourIndex}:00 - ${cell.count} posts`}
-                ></div>
-              ))}
+              {grid[dayIndex].map((cell, hourIndex) => {
+                const tooltip = formatTooltip(dayLabel, hourIndex, cell.value, cell.count, metric);
+                return (
+                  <div
+                    key={`${dayLabel}-${hourIndex}`}
+                    className={variant === "card" ? "h-6 rounded-sm border border-white/5" : "h-4 rounded-sm border border-white/5"}
+                    style={{ backgroundColor: colorFor(cell.value, maxValue) }}
+                    title={tooltip}
+                    aria-label={tooltip}
+                  ></div>
+                );
+              })}
             </div>
           ))}
         </div>

@@ -1,5 +1,6 @@
-﻿"use client";
+"use client";
 
+import { useMemo } from "react";
 import {
   CartesianGrid,
   ResponsiveContainer,
@@ -23,13 +24,17 @@ export default function ScatterEngagementVsFollows({
   variant = "card",
   height = 360
 }: ScatterEngagementVsFollowsProps) {
-  const data = rows
-    .map((row) => ({
-      engagements: engagementCount(row),
-      newFollows: row.newFollows,
-      text: row.text
-    }))
-    .filter((point) => point.engagements > 0 || point.newFollows > 0);
+  const data = useMemo(
+    () =>
+      rows
+        .map((row) => ({
+          engagements: engagementCount(row),
+          newFollows: row.newFollows ?? 0,
+          text: row.text
+        }))
+        .filter((point) => point.engagements > 0 || point.newFollows > 0),
+    [rows]
+  );
 
   if (!data.length) {
     return (
@@ -43,8 +48,8 @@ export default function ScatterEngagementVsFollows({
     <ResponsiveContainer width="100%" height="100%">
       <ScatterChart>
         <CartesianGrid stroke="rgba(255,255,255,0.08)" />
-        <XAxis dataKey="engagements" name="Engagements" tick={{ fill: "#9fb1c1" }} />
-        <YAxis dataKey="newFollows" name="New follows" tick={{ fill: "#9fb1c1" }} />
+        <XAxis dataKey="engagements" name="Engagements" tick={{ fill: "#c8d5e2" }} />
+        <YAxis dataKey="newFollows" name="New follows" tick={{ fill: "#c8d5e2" }} />
         <Tooltip
           cursor={{ strokeDasharray: "3 3" }}
           contentStyle={{
