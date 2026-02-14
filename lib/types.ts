@@ -18,6 +18,15 @@ export type OverviewRow = {
   engagements: number | null;
   profileVisits: number | null;
   newFollows: number | null;
+  likes: number | null;
+  bookmarks: number | null;
+  shares: number | null;
+  unfollows: number | null;
+  replies: number | null;
+  reposts: number | null;
+  createPost: number | null;
+  videoViews: number | null;
+  mediaViews: number | null;
 };
 
 export type NormalizationResult<T> = {
@@ -39,5 +48,9 @@ export const FIELD_LABELS: Record<string, string> = {
   profileVisits: "Profile visits",
   newFollows: "New follows",
   date: "Date",
-  engagements: "Engagements"
+  engagements: "Engagements",
+  unfollows: "Unfollows",
+  createPost: "Posts created",
+  videoViews: "Video views",
+  mediaViews: "Media views"
 };

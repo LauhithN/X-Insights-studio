@@ -113,48 +113,111 @@ export const demoOverviewRows: OverviewRow[] = [
     impressions: 26500,
     engagements: 930,
     profileVisits: 520,
-    newFollows: 120
+    newFollows: 120,
+    likes: 380,
+    bookmarks: 18,
+    shares: 8,
+    unfollows: 12,
+    replies: 42,
+    reposts: 56,
+    createPost: 3,
+    videoViews: 0,
+    mediaViews: 0
   },
   {
     date: "2025-01-07",
     impressions: 31200,
     engagements: 1240,
     profileVisits: 610,
-    newFollows: 165
+    newFollows: 165,
+    likes: 490,
+    bookmarks: 30,
+    shares: 14,
+    unfollows: 8,
+    replies: 66,
+    reposts: 82,
+    createPost: 4,
+    videoViews: 0,
+    mediaViews: 0
   },
   {
     date: "2025-01-08",
     impressions: 21800,
     engagements: 760,
     profileVisits: 430,
-    newFollows: 98
+    newFollows: 98,
+    likes: 290,
+    bookmarks: 12,
+    shares: 5,
+    unfollows: 15,
+    replies: 28,
+    reposts: 34,
+    createPost: 2,
+    videoViews: 0,
+    mediaViews: 0
   },
   {
     date: "2025-01-09",
     impressions: 34800,
     engagements: 1520,
     profileVisits: 720,
-    newFollows: 190
+    newFollows: 190,
+    likes: 620,
+    bookmarks: 52,
+    shares: 18,
+    unfollows: 6,
+    replies: 78,
+    reposts: 120,
+    createPost: 5,
+    videoViews: 0,
+    mediaViews: 0
   },
   {
     date: "2025-01-10",
     impressions: 28900,
     engagements: 940,
     profileVisits: 580,
-    newFollows: 132
+    newFollows: 132,
+    likes: 360,
+    bookmarks: 20,
+    shares: 9,
+    unfollows: 10,
+    replies: 36,
+    reposts: 48,
+    createPost: 3,
+    videoViews: 0,
+    mediaViews: 0
   },
   {
     date: "2025-01-11",
     impressions: 30100,
     engagements: 1100,
     profileVisits: 640,
-    newFollows: 150
+    newFollows: 150,
+    likes: 420,
+    bookmarks: 26,
+    shares: 11,
+    unfollows: 9,
+    replies: 48,
+    reposts: 64,
+    createPost: 4,
+    videoViews: 0,
+    mediaViews: 0
   },
   {
     date: "2025-01-12",
     impressions: 27400,
     engagements: 980,
     profileVisits: 560,
-    newFollows: 142
+    newFollows: 142,
+    likes: 340,
+    bookmarks: 22,
+    shares: 8,
+    unfollows: 11,
+    replies: 40,
+    reposts: 52,
+    createPost: 2,
+    videoViews: 0,
+    mediaViews: 0
   }
 ];

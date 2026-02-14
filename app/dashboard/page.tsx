@@ -8,6 +8,13 @@ import ScatterEngagementVsFollows from "@/components/ScatterEngagementVsFollows"
 import HeatmapDayHour from "@/components/HeatmapDayHour";
 import ViralCard from "@/components/ViralCard";
 import DailyTrends from "@/components/DailyTrends";
+import NetFollowerGrowth from "@/components/NetFollowerGrowth";
+import PostFrequencyVsGrowth from "@/components/PostFrequencyVsGrowth";
+import EngagementMixChart from "@/components/EngagementMixChart";
+import EfficiencyTrend from "@/components/EfficiencyTrend";
+import ProfileVisitFunnel from "@/components/ProfileVisitFunnel";
+import ViralDayDetector from "@/components/ViralDayDetector";
+import StreakConsistencyGrid from "@/components/StreakConsistencyGrid";
 import { useAnalyticsStore } from "@/store/useAnalyticsStore";
 import {
   dayOf,
@@ -274,6 +281,26 @@ export default function DashboardPage() {
             <h3 className="text-xl font-semibold text-white">Daily Trends</h3>
             <DailyTrends rows={overviewRows} />
           </section>
+        ) : null}
+
+        {overviewRows.length ? (
+          <>
+            <NetFollowerGrowth rows={overviewRows} />
+
+            <section className="grid gap-6 lg:grid-cols-2">
+              <PostFrequencyVsGrowth rows={overviewRows} />
+              <ProfileVisitFunnel rows={overviewRows} />
+            </section>
+
+            <section className="grid gap-6 lg:grid-cols-2">
+              <EngagementMixChart rows={overviewRows} />
+              <EfficiencyTrend rows={overviewRows} />
+            </section>
+
+            <ViralDayDetector rows={overviewRows} />
+
+            <StreakConsistencyGrid rows={overviewRows} />
+          </>
         ) : null}
 
         {!scatterData.length ? (

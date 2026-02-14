@@ -6,12 +6,25 @@ const OVERVIEW_ALIASES: Record<string, string[]> = {
   impressions: ["impressions", "impression", "views", "view"],
   engagements: ["engagements", "engagement"],
   profileVisits: ["profile visits", "profile visit", "profile views", "profile view", "profile clicks", "profile click"],
-  newFollows: ["new follows", "new follow", "newfollows", "follows", "followers gained", "follower gains", "follows gained"]
+  newFollows: ["new follows", "new follow", "newfollows", "follows", "followers gained", "follower gains", "follows gained"],
+  likes: ["likes", "like"],
+  bookmarks: ["bookmarks", "bookmark"],
+  shares: ["shares", "share"],
+  unfollows: ["unfollows", "unfollow", "followers lost"],
+  replies: ["replies", "reply"],
+  reposts: ["reposts", "repost", "retweets", "retweet"],
+  createPost: ["create post", "posts created", "tweets", "posts", "post count"],
+  videoViews: ["video views", "video view"],
+  mediaViews: ["media views", "media view", "media engagements"]
 };
 
 const REQUIRED_FIELDS = ["date", "impressions"];
-const OPTIONAL_FIELDS = ["engagements", "profileVisits", "newFollows"];
-type OptionalNumericField = "engagements" | "profileVisits" | "newFollows";
+const OPTIONAL_FIELDS = [
+  "engagements", "profileVisits", "newFollows",
+  "likes", "bookmarks", "shares", "unfollows",
+  "replies", "reposts", "createPost", "videoViews", "mediaViews"
+];
+type OptionalNumericField = typeof OPTIONAL_FIELDS[number];
 
 function countInvalid(target: Record<string, number>, field: string): void {
   target[field] = (target[field] ?? 0) + 1;
@@ -66,7 +79,16 @@ export function normalizeOverview(
         impressions: impressionsResult.value,
         engagements: parseOptionalNumber("engagements"),
         profileVisits: parseOptionalNumber("profileVisits"),
-        newFollows: parseOptionalNumber("newFollows")
+        newFollows: parseOptionalNumber("newFollows"),
+        likes: parseOptionalNumber("likes"),
+        bookmarks: parseOptionalNumber("bookmarks"),
+        shares: parseOptionalNumber("shares"),
+        unfollows: parseOptionalNumber("unfollows"),
+        replies: parseOptionalNumber("replies"),
+        reposts: parseOptionalNumber("reposts"),
+        createPost: parseOptionalNumber("createPost"),
+        videoViews: parseOptionalNumber("videoViews"),
+        mediaViews: parseOptionalNumber("mediaViews")
       }
     ];
   });
