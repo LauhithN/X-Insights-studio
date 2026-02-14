@@ -62,14 +62,16 @@ export function parseCsv(file: File, options: ParseCsvOptions = {}): Promise<Par
         rows.push(row);
       },
       complete: (results) => {
-        parseErrors.push(...collectParseErrors(results.errors));
+        if (results?.errors) {
+          parseErrors.push(...collectParseErrors(results.errors));
+        }
         if (truncated) {
           parseErrors.push(`Row limit exceeded. Only the first ${maxRows.toLocaleString()} rows were loaded.`);
         }
 
         resolve({
           rows,
-          fields: results.meta.fields ?? fields,
+          fields: results?.meta?.fields ?? fields,
           errors: Array.from(new Set(parseErrors)),
           rowCount,
           truncated

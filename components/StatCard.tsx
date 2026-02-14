@@ -8,11 +8,12 @@ type StatCardProps = {
 
 export default function StatCard({ label, value, hint }: StatCardProps) {
   return (
-    <div className="glass-card relative overflow-hidden p-5">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neon/70 to-transparent"></div>
-      <p className="text-[10px] uppercase tracking-[0.22em] text-slate/85">{label}</p>
-      <p className="font-data mt-2 text-3xl font-semibold text-white">{value}</p>
-      {hint ? <p className="mt-2 text-xs text-slate/80">{hint}</p> : null}
+    <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+      <p className="text-[11px] font-medium text-slate/60">{label}</p>
+      <p className="mt-2 font-mono text-2xl font-semibold tracking-tight text-white">
+        {value}
+      </p>
+      {hint ? <p className="mt-2 text-xs text-slate/50">{hint}</p> : null}
     </div>
   );
 }

@@ -29,21 +29,21 @@ export default function ViralCard({ title, subtitle, children, fileName }: Viral
   };
 
   return (
-    <div className="glass-card p-4">
-      <div ref={cardRef} className="rounded-xl border border-white/10 bg-[#0b0f14] p-4">
+    <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+      <div ref={cardRef} className="rounded-xl border border-white/[0.06] bg-[#0b0f14] p-4">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-slate/90">Viral Insight</p>
-            <h4 className="text-lg font-semibold text-white">{title}</h4>
-            {subtitle ? <p className="text-xs text-slate">{subtitle}</p> : null}
+            <p className="text-xs text-slate/50">Viral Insight</p>
+            <h4 className="text-sm font-medium text-white/85">{title}</h4>
+            {subtitle ? <p className="text-xs text-slate/50">{subtitle}</p> : null}
           </div>
-          <div className="pill">X Insights</div>
+          <div className="inline-flex items-center rounded-md border-l-2 border-neon/60 bg-white/[0.03] px-2 py-1 text-xs text-slate/70">X Insights</div>
         </div>
         <div className="mt-4">{children}</div>
       </div>
       <button
         onClick={handleExport}
-        className="mt-4 w-full rounded-full border border-edge/60 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neon disabled:opacity-50"
+        className="mt-4 w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/[0.08] disabled:opacity-50"
         disabled={isExporting}
         aria-busy={isExporting}
       >

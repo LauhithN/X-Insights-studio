@@ -128,32 +128,32 @@ export default function DashboardPage() {
 
   if (!hasHydrated) {
     return (
-      <main className="min-h-screen px-6 py-10">
+      <main className="min-h-screen px-6 py-8">
         <div className="mx-auto max-w-6xl">
-          <div className="glass-card p-6 text-sm text-slate">Loading saved analytics...</div>
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 text-sm text-slate/50">Loading saved analytics...</div>
         </div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen px-6 py-10">
+    <main className="min-h-screen px-6 py-8">
       <div className="mx-auto flex max-w-6xl flex-col gap-10">
         <header className="fade-in-up flex flex-wrap items-center justify-between gap-4">
           <div>
-            <p className="pill">Dashboard</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white">X Insights Studio</h2>
-            <p className="mt-2 text-sm text-slate">
-              Content file: <span className="text-white">{contentFileName || "(loaded)"}</span>
+            <div className="inline-flex items-center gap-2 rounded-md border-l-2 border-neon/60 bg-white/[0.03] px-3 py-1.5 text-xs text-slate/70">Dashboard</div>
+            <h2 className="mt-4 text-2xl font-medium tracking-tight text-white/90">X Insights Studio</h2>
+            <p className="mt-2 text-sm text-slate/50">
+              Content file: <span className="text-white/90">{contentFileName || "(loaded)"}</span>
               {overviewFileName ? (
-                <span className="text-slate"> - Overview file: {overviewFileName}</span>
+                <span className="text-slate/50"> - Overview file: {overviewFileName}</span>
               ) : null}
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
             <button
               onClick={() => router.push("/")}
-              className="rounded-full border border-edge/60 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neon"
+              className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/[0.08]"
             >
               Upload new CSV
             </button>
@@ -162,14 +162,14 @@ export default function DashboardPage() {
                 clear();
                 router.push("/");
               }}
-              className="rounded-full border border-ember/40 bg-ember/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-ember/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember"
+              className="rounded-lg border border-red-400/15 bg-red-400/[0.04] px-4 py-2 text-sm font-medium text-red-400/70 transition-colors hover:bg-red-400/[0.08]"
             >
               Reset data
             </button>
           </div>
         </header>
 
-        <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           <StatCard label="Posts loaded" value={formatNumber(contentRows.length)} />
           <StatCard label="Total impressions" value={formatNumber(totals.impressions)} />
           <StatCard label="Total follows" value={formatNumber(totals.follows)} />
@@ -179,15 +179,15 @@ export default function DashboardPage() {
 
         <section className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h3 className="text-xl font-semibold text-white">Top Tweets by Follower Conversion</h3>
+            <h3 className="text-lg font-medium text-white/85">Top Tweets by Follower Conversion</h3>
             {!hasFollowsColumn ? (
-              <p className="text-xs text-slate">New follows column missing. Upload a richer CSV for this ranking.</p>
+              <p className="text-xs text-slate/50">New follows column missing. Upload a richer CSV for this ranking.</p>
             ) : null}
           </div>
           {hasFollowsColumn ? (
             <TopPostsTable rows={contentRows} />
           ) : (
-            <div className="glass-card p-6 text-sm text-slate">
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 text-sm text-slate/50">
               Follows per 1k impressions requires a &quot;New follows&quot; column.
             </div>
           )}
@@ -195,58 +195,58 @@ export default function DashboardPage() {
 
         <section className="grid gap-6 lg:grid-cols-2">
           <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-white">Engagement != Growth</h3>
+            <h3 className="text-lg font-medium text-white/85">Engagement vs Growth</h3>
             {hasFollowsColumn || hasEngagementColumn ? (
               <ScatterEngagementVsFollows rows={contentRows} />
             ) : (
-              <div className="glass-card p-6 text-sm text-slate">
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 text-sm text-slate/50">
                 This chart needs engagement columns and/or new follows.
               </div>
             )}
           </div>
           <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-white">Posting Time Heatmap</h3>
+            <h3 className="text-lg font-medium text-white/85">Posting Time Heatmap</h3>
             <HeatmapDayHour rows={contentRows} metric={heatmapMetric} />
-            <p className="text-xs text-slate">Time buckets are calculated in UTC.</p>
+            <p className="text-xs text-slate/50">Time buckets are calculated in UTC.</p>
           </div>
         </section>
 
         <section className="space-y-4">
-          <h3 className="text-xl font-semibold text-white">Viral Cards</h3>
-          <div className="grid gap-6 lg:grid-cols-3">
+          <h3 className="text-lg font-medium text-white/85">Viral Cards</h3>
+          <div className="grid gap-4 lg:grid-cols-3">
             <ViralCard title="Top follower conversion" subtitle="Posts with the highest follows / 1k impressions">
               {canShowConversion ? (
                 <div className="space-y-3">
                   {topConversion.map((row, index) => (
-                    <div key={`${row.id ?? index}`} className="rounded-lg border border-white/10 bg-white/5 p-3">
-                      <p className="text-xs text-slate">#{index + 1}</p>
+                    <div key={`${row.id ?? index}`} className="rounded-lg border border-white/[0.05] bg-white/[0.02] p-3">
+                      <p className="text-xs text-slate/50">#{index + 1}</p>
                       <p className="text-sm text-white">{row.text}</p>
-                      <p className="mt-2 text-xs text-neon">
+                      <p className="mt-2 text-xs text-neon/70">
                         {followsPer1k(row).toFixed(2)} follows / 1k impressions
                       </p>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-xs text-slate">Need follows + impressions to rank top conversion posts.</p>
+                <p className="text-xs text-slate/50">Need follows + impressions to rank top conversion posts.</p>
               )}
             </ViralCard>
 
-            <ViralCard title="Engagement != Growth" subtitle="High engagement posts with weaker follow conversion">
+            <ViralCard title="Engagement vs Growth" subtitle="High engagement posts with weaker follow conversion">
               {mismatchInsights.length ? (
                 <div className="space-y-3">
                   {mismatchInsights.map((item, index) => (
-                    <div key={`${item.row.id ?? index}`} className="rounded-lg border border-white/10 bg-white/5 p-3">
-                      <p className="text-xs text-slate">#{index + 1}</p>
+                    <div key={`${item.row.id ?? index}`} className="rounded-lg border border-white/[0.05] bg-white/[0.02] p-3">
+                      <p className="text-xs text-slate/50">#{index + 1}</p>
                       <p className="text-sm text-white">{item.row.text || "(No text)"}</p>
-                      <p className="mt-2 text-xs text-slate">
+                      <p className="mt-2 text-xs text-slate/50">
                         {formatNumber(item.engagements)} engagements, {formatNumber(item.follows)} follows
                       </p>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-xs text-slate">Upload engagement + follows data to generate this insight.</p>
+                <p className="text-xs text-slate/50">Upload engagement + follows data to generate this insight.</p>
               )}
             </ViralCard>
 
@@ -254,12 +254,12 @@ export default function DashboardPage() {
               {bestTimeInsights.length ? (
                 <div className="space-y-3">
                   {bestTimeInsights.map((slot, index) => (
-                    <div key={`${slot.day}-${slot.hour}`} className="rounded-lg border border-white/10 bg-white/5 p-3">
-                      <p className="text-xs text-slate">#{index + 1}</p>
+                    <div key={`${slot.day}-${slot.hour}`} className="rounded-lg border border-white/[0.05] bg-white/[0.02] p-3">
+                      <p className="text-xs text-slate/50">#{index + 1}</p>
                       <p className="text-sm text-white">
                         {dayLabels[slot.day]} {slot.hour.toString().padStart(2, "0")}:00 UTC
                       </p>
-                      <p className="mt-2 text-xs text-neon">
+                      <p className="mt-2 text-xs text-neon/70">
                         {heatmapMetric === "followsPer1k"
                           ? `${slot.score.toFixed(2)} follows / 1k`
                           : heatmapMetric === "engagementRate"
@@ -270,7 +270,7 @@ export default function DashboardPage() {
                   ))}
                 </div>
               ) : (
-                <p className="text-xs text-slate">Need valid timestamps to compute best posting windows.</p>
+                <p className="text-xs text-slate/50">Need valid timestamps to compute best posting windows.</p>
               )}
             </ViralCard>
           </div>
@@ -278,7 +278,7 @@ export default function DashboardPage() {
 
         {overviewRows.length ? (
           <section className="space-y-4">
-            <h3 className="text-xl font-semibold text-white">Daily Trends</h3>
+            <h3 className="text-lg font-medium text-white/85">Daily Trends</h3>
             <DailyTrends rows={overviewRows} />
           </section>
         ) : null}
@@ -304,7 +304,7 @@ export default function DashboardPage() {
         ) : null}
 
         {!scatterData.length ? (
-          <div className="glass-card p-5 text-sm text-slate">
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 text-sm text-slate/50">
             Engagement and follow columns are sparse in this dataset; some growth visuals are limited.
           </div>
         ) : null}
